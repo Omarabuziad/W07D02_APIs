@@ -51,7 +51,7 @@ app.get("/user/:name", (req, res) => {
     // set the response status code to 200 (OK)
     // sends back a response of the found user
     res.status(200);
-    res.json(found);
+    res.json(user);
   } else {
     // set the response status code to 404 (Not Found)
     res.status(404);
