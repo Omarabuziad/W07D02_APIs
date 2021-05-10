@@ -7,25 +7,14 @@ app.use(express.json());
 
 
 const todos = [
- { todo: " wake up", isCompleted: false },
+ { todo: "wake up", isCompleted: false },
  { todo: "Eat Breakfast", isCompleted: false }
 ];
 
 app.get("/todos" , (req , res) => {
     res.status(200);
-
-    /*todos.forEach( function(elem , i){
-     res.json(elem.todo);
-    })*/
-
-    const todo_list = []
-
-
-    for(let i = 0 ; i<todos.length ; i++ ){
-        todo_list.push(todos[i].todo);
-    }
     
-    res.json(todo_list);
+    res.json(todos);
 
 });
 
@@ -44,6 +33,68 @@ app.post("/create/todo", (req, res) => {
     res.json(newTodo);
   
 });
+
+
+app.put("/update/todo/:name", (req, res) => {
+    const todo = req.params.name
+    let i 
+  
+    const found = todos.find((element , index ) => {
+        i = index
+
+      return element.todo === todo;
+    });
+  
+    if (found) {
+      res.status(200);
+      const updTodo = { todo: req.body.todo , isCompleted: req.body.isCompleted };
+
+      todos[i] = updTodo
+  
+
+    
+      res.json(updTodo);
+
+    } else {
+      res.status(404);
+      res.json("todo not found");
+    }
+
+
+});
+
+
+app.delete("/delete/todo/:name", (req, res) => {
+    const todo = req.params.name
+    let i 
+  
+    const found = todos.find((element , index ) => {
+        i = index
+
+      return element.todo === todo;
+    });
+  
+    if (found) {
+      res.status(200);
+      todos.splice(i,1)
+  
+      res.json(found);
+
+    } else {
+      res.status(404);
+      res.json("todo not found");
+    }
+
+
+});
+
+
+
+
+
+
+
+
 
 
 
