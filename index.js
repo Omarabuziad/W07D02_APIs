@@ -19,6 +19,28 @@ app.get("/users", (req, res) => {
   res.json(users);
 });
 
+
+app.get("/first-user", (req, res) => {
+    // set the response status code to 200 (OK)
+    res.status(200);
+    // sends back a response of all users
+    res.json(users[0]);
+});
+
+
+app.get("/", (req, res) => {
+    // set the response status code to 200 (OK)
+    res.status(200);
+    // sends back a response of all users
+    res.json("hello world");
+});
+
+// add html element by hello world text 
+
+
+
+
+
 // a GET request on endpoint http://localhost:3000/user?name=John
 app.get("/user", (req, res) => {
   const user = req.query.name
