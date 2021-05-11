@@ -89,6 +89,53 @@ app.delete("/delete/todo/:name", (req, res) => {
 });
 
 
+app.put("/complete/todo/:name", (req, res) => {
+    const todo = req.params.name
+    let o 
+    const found = todos.find((element , index ) => {
+        o = index
+
+      return element.todo === todo;
+    });
+  
+    if (found) {
+      res.status(200);
+
+      todos[o].isCompleted = true ;
+
+      res.json(todos[o])
+
+
+  
+    } else {
+      res.status(404);
+      res.json("todo not found");
+    }
+
+
+});
+
+
+
+
+
+app.get("/completed/todos", (req, res) => {
+  const compTodo = []
+  todos.forEach(function(elem , i ){
+    if(elem.isCompleted === true) {
+      compTodo.push(elem)
+    }
+  })
+
+  if(compTodo[0]){
+    res.status(200);
+    res.json(compTodo) } else {
+      res.json("there is no completed todo")
+    }
+
+
+
+});
 
 
 
@@ -126,8 +173,7 @@ app.delete("/delete/todo/:name", (req, res) => {
 
 
 
-
-app.listen(port, () => {
+app.listen(3500, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
   
