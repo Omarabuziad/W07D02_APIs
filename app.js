@@ -121,18 +121,17 @@ app.put("/complete/todo/:name", (req, res) => {
 
 app.get("/completed/todos", (req, res) => {
   const compTodo = []
-  todos.forEach(function(elem , i ){
-    if(elem.isCompleted === true) {
-      compTodo.push(elem)
-    }
+  const k = todos.filter(function(elem , i ){
+    return elem.isCompleted == true
   })
 
-  if(compTodo[0]){
-    res.status(200);
-    res.json(compTodo) } else {
-      res.json("there is no completed todo")
-    }
+  if(k[0]){
+  res.json(k)
+  } else {
+    res.json("there is no completed todo")
+  }
 
+  
 
 
 });
@@ -173,7 +172,7 @@ app.get("/completed/todos", (req, res) => {
 
 
 
-app.listen(3500, () => {
+app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
   
